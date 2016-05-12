@@ -869,6 +869,16 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
         }
         return uri;
     }
+    
+    /**
+     * FbF fix using: http://stackoverflow.com/questions/7286714/android-get-orientation-of-a-camera-bitmap-and-rotate-back-90-degrees/11081918#11081918
+     * */
+    private static int exifToDegrees(int exifOrientation) {
+	if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_90) { return 90; }
+	else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_180) {  return 180; }
+	else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_270) {  return 270; }            
+	return 0;
+    }
 
     /**
      * Return a scaled and rotated bitmap based on the target width and height
